@@ -86,6 +86,8 @@ typedef union SDL_Event {
 
 int SDL_Init(Uint32 flags);
 
+const char *SDL_GetError();
+
 SDL_Window *SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags);
 
 SDL_Renderer *SDL_CreateRenderer(SDL_Window *window, int index, Uint32 flags);

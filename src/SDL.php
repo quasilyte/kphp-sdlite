@@ -6,6 +6,14 @@ namespace Quasilyte\SDLite;
 //
 // 1. We're using void* for SDL_Surface as it's used between several FFI scope declarations.
 //    We may try using FFI::cast to convert between these two, maybe perhaps unlikely...
+//
+//
+// FIXME/TODO.
+//
+// 2. SDL_Color is not a pointer type, but it's required in different FFI scopes.
+//    We can't use void* hack here.
+//    To avoid this problem, we're using a KPHP type Color and convert it to SDL_Color
+//    when needed.
 
 class SDL {
     const AUDIO_U8     = 0x0008;
@@ -51,13 +59,27 @@ class SDL {
         \FFI::load(__DIR__ . '/sdl_mixer.h');
     }
 
+    public static function loadTTFLib() {
+        \FFI::load(__DIR__ . '/sdl_ttf.h');
+    }
+
     public function __construct() {
         $this->corelib = \FFI::scope('sdl');
         $this->imagelib = \FFI::scope('sdl_image');
+        $this->mixerlib = \FFI::scope('sdl_mixer');
+        $this->ttflib = \FFI::scope('sdl_ttf');
     }
 
     public function init(int $flags = self::INIT_EVERYTHING): bool {
         return $this->corelib->SDL_Init($flags) === 0;
+    }
+
+    public function initTTF(): bool {
+        return $this->ttflib->TTF_Init() === 0;
+    }
+
+    public function getError(): string {
+        return $this->corelib->SDL_GetError();
     }
 
     /** @return ffi_cdata<sdl, struct SDL_Window*> */
@@ -146,6 +168,52 @@ class SDL {
         return $this->mixerlib->Mix_PlayChannelTimed($channel, $chunk, $loops, -1) !== -1;
     }
 
+    /** @return ffi_cdata<sdl_ttf, struct TTF_Font*> */
+    public function openFont(string $path, int $ptsize) {
+        return $this->ttflib->TTF_OpenFont($path, $ptsize);
+    }
+
+    /**
+     * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
+     * @return ffi_cdata<sdl_ttf, void*>
+     */
+    public function renderTextSolid($font, string $text, Color $color) {
+        $c_color = $this->convertColor($color);
+        return $this->ttflib->TTF_RenderText_Solid($font, $text, $c_color);
+    }
+
+    /**
+     * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
+     * @return ffi_cdata<sdl_ttf, void*>
+     */
+    public function renderTextBlended($font, string $text, Color $color) {
+        $c_color = $this->convertColor($color);
+        return $this->ttflib->TTF_RenderText_Blended($font, $text, $c_color);
+    }
+
+    /**
+     * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
+     * @return ffi_cdata<sdl_ttf, void*>
+     */
+    public function renderTextShaded($font, string $text, Color $fg, Color $bg) {
+        $c_fg = $this->convertColor($fg);
+        $c_bg = $this->convertColor($bg);
+        return $this->ttflib->TTF_RenderText_Shaded($font, $text, $c_fg, $c_bg);
+    }
+
+    /**
+     * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
+     * @return tuple(int, int)
+     */
+    public function sizeText($font, string $text) {
+        $w = \FFI::new('int');
+        $h = \FFI::new('int');
+        if ($this->ttflib->TTF_SizeText($font, $text, \FFI::addr($w), \FFI::addr($h)) === 0) {
+            return tuple($w->cdata, $h->cdata);
+        }
+        return tuple(-1, -1);
+    }
+
     /** @return ffi_cdata<sdl, struct SDL_Rect> */
     public function newRect() {
         return $this->corelib->new('struct SDL_Rect');
@@ -156,10 +224,22 @@ class SDL {
         return $this->corelib->new('union SDL_Event');
     }
 
+    /** @return ffi_cdata<sdl_ttf, struct SDL_Color> */
+    private function convertColor(Color $color) {
+        $c_color = $this->ttflib->new('struct SDL_Color');
+        $c_color->r = $color->r;
+        $c_color->g = $color->g;
+        $c_color->b = $color->b;
+        $c_color->a = $color->a;
+        return $c_color;
+    }
+
     /** @var ffi_scope<sdl> */
     private $corelib = null;
     /** @var ffi_scope<sdl_image> */
     private $imagelib = null;
     /** @var ffi_scope<sdl_mixer> */
     private $mixerlib = null;
+    /** @var ffi_scope<sdl_ttf> */
+    private $ttflib = null;
 }
