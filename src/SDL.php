@@ -95,26 +95,6 @@ class SDL {
         return $this->corelib->SDL_CreateRenderer($window, $index, $flags);
     }
 
-    /** @param ffi_cdata<sdl, struct SDL_Renderer*> $renderer */
-    public function renderClear($renderer): bool {
-        return $this->corelib->SDL_RenderClear($renderer) === 0;
-    }
-
-    /**
-     * @param ffi_cdata<sdl, struct SDL_Renderer*> $renderer
-     * @param ffi_cdata<sdl, struct SDL_Texture*> $texture
-     * @param ffi_cdata<sdl, struct SDL_Rect*> $srcrect
-     * @param ffi_cdata<sdl, struct SDL_Rect*> $dstrect
-     */
-    public function renderCopy($renderer, $texture, $srcrect, $dstrect): bool {
-        return $this->corelib->SDL_RenderCopy($renderer, $texture, $srcrect, $dstrect) === 0;
-    }
-
-    /** @param ffi_cdata<sdl, struct SDL_Renderer*> $renderer */
-    public function renderPresent($renderer) {
-        $this->corelib->SDL_RenderPresent($renderer);
-    }
-
     /** @return ffi_cdata<sdl_image, void*> */
     public function imgLoad(string $path) {
         return $this->imagelib->IMG_Load($path);
@@ -235,11 +215,11 @@ class SDL {
     }
 
     /** @var ffi_scope<sdl> */
-    private $corelib = null;
+    public $corelib = null;
     /** @var ffi_scope<sdl_image> */
-    private $imagelib = null;
+    public $imagelib = null;
     /** @var ffi_scope<sdl_mixer> */
-    private $mixerlib = null;
+    public $mixerlib = null;
     /** @var ffi_scope<sdl_ttf> */
-    private $ttflib = null;
+    public $ttflib = null;
 }
