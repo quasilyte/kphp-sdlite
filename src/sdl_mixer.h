@@ -1,0 +1,19 @@
+#define FFI_SCOPE "sdl_mixer"
+#define FFI_LIB "libSDL2_mixer-2.0.so"
+
+typedef uint8_t Uint8;
+typedef uint16_t Uint16;
+typedef uint32_t Uint32;
+typedef int8_t Sint8;
+typedef int16_t Sint16;
+typedef int32_t Sint32;
+
+typedef struct { void *_opaque; } Mix_Chunk;
+typedef struct { void *_opaque; } SDL_RWops;
+
+int Mix_OpenAudio(int frequency, Uint16 format, int channels, int chunksize);
+
+SDL_RWops *SDL_RWFromFile(const char *file, const char *mode);
+Mix_Chunk *Mix_LoadWAV_RW(SDL_RWops *src, int freesrc);
+
+int Mix_PlayChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ticks);

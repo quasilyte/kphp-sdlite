@@ -10,17 +10,6 @@ typedef int32_t Sint32;
 
 typedef Sint32 SDL_Keycode;
 
-typedef enum {
-  SDL_KEYDOWN = 0x300,
-} SDL_EventType;
-
-typedef enum {
-  SDL_SCANCODE_RIGHT = 79,
-  SDL_SCANCODE_LEFT = 80,
-  SDL_SCANCODE_DOWN = 81,
-  SDL_SCANCODE_UP = 82,
-} SDL_Scancode;
-
 typedef struct { void *_opaque; } SDL_Window;
 typedef struct { void *_opaque; } SDL_Renderer;
 typedef struct { void *_opaque; } SDL_Texture;
@@ -31,7 +20,7 @@ typedef struct {
 } SDL_Rect;
 
 typedef struct {
-  SDL_Scancode scancode;
+  int scancode;
   SDL_Keycode sym;
   Uint16 mod;
   Uint32 unused;
@@ -49,8 +38,8 @@ typedef struct {
 } SDL_KeyboardEvent;
 
 typedef struct SDL_QuitEvent {
-    Uint32 type;
-    Uint32 timestamp;
+  Uint32 type;
+  Uint32 timestamp;
 } SDL_QuitEvent;
 
 typedef struct {
@@ -66,12 +55,12 @@ typedef struct {
 } SDL_WindowEvent;
 
 typedef struct {
-    Uint32 type;
-    Uint32 timestamp;
-    Uint32 windowID;
-    char text[32];
-    Sint32 start;
-    Sint32 length;
+  Uint32 type;
+  Uint32 timestamp;
+  Uint32 windowID;
+  char text[32];
+  Sint32 start;
+  Sint32 length;
 } SDL_TextEditingEvent;
 
 typedef struct {
@@ -106,7 +95,7 @@ int SDL_RenderCopy(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Rect 
 
 SDL_Texture *SDL_CreateTextureFromSurface(SDL_Renderer *renderer, void *surface);
 int SDL_QueryTexture(SDL_Texture *texture, Uint32 *format, int *access, int *w, int *h);
-void SDL_FreeSurface(void* surface);
+void SDL_FreeSurface(void *surface);
 
 int SDL_PollEvent(SDL_Event *event);
 void SDL_Delay(Uint32 ms);
