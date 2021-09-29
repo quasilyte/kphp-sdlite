@@ -15,8 +15,6 @@ class SDL {
     const AUDIO_U16MSB = 0x1010;
     const AUDIO_S16MSB = 0x9010;
 
-    const KEYDOWN = 0x300;
-
     const RENDERER_SOFTWARE = 1;
     const RENDERER_ACCELERATED = 2;
 
