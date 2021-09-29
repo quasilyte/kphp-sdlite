@@ -1,0 +1,20 @@
+{
+    "name": "quasilyte/kphp-sdlite",
+    "description": "Simple SDL framework for KPHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Iskander Sharipov",
+            "email": "quasilyte@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Quasilyte\\SDLite": "src/"
+        }
+    }
+}
