@@ -91,7 +91,7 @@ class SDL {
      * @param ffi_cdata<sdl, struct SDL_Window*> $window
      * @return ffi_cdata<sdl, struct SDL_Renderer*>
      */
-    public function createRenderer($window, int $index, int $flags = self::RENDERER_ACCELERATED) {
+    public function createRenderer($window, int $index = -1, int $flags = self::RENDERER_ACCELERATED) {
         return $this->corelib->SDL_CreateRenderer($window, $index, $flags);
     }
 
