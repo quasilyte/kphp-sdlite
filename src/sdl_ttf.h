@@ -23,6 +23,8 @@ TTF_Font *TTF_OpenFont(const char *file, int ptsize);
 
 void *TTF_RenderText_Shaded(TTF_Font *font, const char *text, SDL_Color fg, SDL_Color bg);
 void *TTF_RenderText_Blended(TTF_Font *font, const char *text, SDL_Color fg);
+void *TTF_RenderUTF8_Blended(TTF_Font *font, const char *text, SDL_Color fg);
 void *TTF_RenderText_Solid(TTF_Font *font, const char *text, SDL_Color fg);
 
 int TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h);
+int TTF_SizeUTF8(TTF_Font *font, const char *text, int *w, int *h);

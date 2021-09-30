@@ -175,6 +175,15 @@ class SDL {
      * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
      * @return ffi_cdata<sdl_ttf, void*>
      */
+    public function renderUTF8Blended($font, string $text, Color $color) {
+        $c_color = $this->convertColor($color);
+        return $this->ttflib->TTF_RenderUTF8_Blended($font, $text, $c_color);
+    }
+
+    /**
+     * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
+     * @return ffi_cdata<sdl_ttf, void*>
+     */
     public function renderTextShaded($font, string $text, Color $fg, Color $bg) {
         $c_fg = $this->convertColor($fg);
         $c_bg = $this->convertColor($bg);
@@ -189,6 +198,19 @@ class SDL {
         $w = \FFI::new('int');
         $h = \FFI::new('int');
         if ($this->ttflib->TTF_SizeText($font, $text, \FFI::addr($w), \FFI::addr($h)) === 0) {
+            return tuple($w->cdata, $h->cdata);
+        }
+        return tuple(-1, -1);
+    }
+
+    /**
+     * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
+     * @return tuple(int, int)
+     */
+    public function sizeUTF8($font, string $text) {
+        $w = \FFI::new('int');
+        $h = \FFI::new('int');
+        if ($this->ttflib->TTF_SizeUTF8($font, $text, \FFI::addr($w), \FFI::addr($h)) === 0) {
             return tuple($w->cdata, $h->cdata);
         }
         return tuple(-1, -1);
