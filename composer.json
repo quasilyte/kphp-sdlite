@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Quasilyte\\SDLite": "src/"
+            "Quasilyte\\SDLite\\": "src/"
         }
     }
 }
