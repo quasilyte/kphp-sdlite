@@ -100,6 +100,7 @@ int SDL_RenderDrawLine(SDL_Renderer *renderer, int x1, int y1, int x2, int y2);
 
 SDL_Texture *SDL_CreateTextureFromSurface(SDL_Renderer *renderer, void *surface);
 int SDL_QueryTexture(SDL_Texture *texture, Uint32 *format, int *access, int *w, int *h);
+void SDL_DestroyTexture(SDL_Texture *texture);
 
 Uint32 SDL_GetWindowPixelFormat(SDL_Window *window);
 void *SDL_ConvertSurfaceFormat(void *src, Uint32 pixel_format, Uint32 flags);

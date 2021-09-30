@@ -109,6 +109,11 @@ class SDL {
         return $this->corelib->SDL_CreateTextureFromSurface($renderer, $surface);
     }
 
+    /** @var ffi_cdata<sdl, struct SDL_Texture*> */
+    public function destroyTexture($texture) {
+        $this->corelib->SDL_DestroyTexture($texture);
+    }
+
     /** @param ffi_cdata<sdl, struct SDL_Window*> $window */
     public function getWindowPixelFormat($window): int {
         return $this->corelib->SDL_GetWindowPixelFormat($window);
