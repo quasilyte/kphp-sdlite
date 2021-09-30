@@ -109,6 +109,19 @@ class SDL {
         return $this->corelib->SDL_CreateTextureFromSurface($renderer, $surface);
     }
 
+    /** @param ffi_cdata<sdl, struct SDL_Window*> $window */
+    public function getWindowPixelFormat($window): int {
+        return $this->corelib->SDL_GetWindowPixelFormat($window);
+    }
+
+    /**
+     * @param ffi_cdata<sdl, void*> $src_surface
+     * @return ffi_cdata<sdl, void*>
+     */
+    public function convertSurfaceFormat($src_surface, int $pixel_format, int $flags = 0) {
+        return $this->corelib->SDL_ConvertSurfaceFormat($src_surface, $pixel_format, $flags);
+    }
+
     /** @param ffi_cdata<sdl, void*> $surface */
     public function freeSurface($surface) {
         $this->corelib->SDL_FreeSurface($surface);
