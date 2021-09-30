@@ -26,6 +26,12 @@ class Renderer {
         return $this->corelib->SDL_RenderCopy($this->renderer, $texture, $srcrect, $dstrect) === 0;
     }
 
+    /**
+     * @param ffi_cdata<sdl, struct SDL_Rect> $rect
+     */
+    public function fillRect($rect): bool {
+        return $this->corelib->SDL_RenderFillRect($this->renderer, \FFI::addr($rect)) === 0;
+    }
 
     public function setDrawColor(Color $color): bool {
         return $this->corelib->SDL_SetRenderDrawColor($this->renderer, $color->r, $color->g, $color->b, $color->a) === 0;

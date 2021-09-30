@@ -97,6 +97,7 @@ int SDL_RenderCopy(SDL_Renderer *renderer, SDL_Texture *texture, const SDL_Rect 
 
 int SDL_SetRenderDrawColor(SDL_Renderer *renderer, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 int SDL_RenderDrawLine(SDL_Renderer *renderer, int x1, int y1, int x2, int y2);
+int SDL_RenderFillRect(SDL_Renderer *renderer, const SDL_Rect *rect);
 
 SDL_Texture *SDL_CreateTextureFromSurface(SDL_Renderer *renderer, void *surface);
 int SDL_QueryTexture(SDL_Texture *texture, Uint32 *format, int *access, int *w, int *h);
