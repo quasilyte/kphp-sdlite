@@ -202,6 +202,15 @@ class SDL {
      * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
      * @return ffi_cdata<sdl_ttf, void*>
      */
+    public function renderUTF8BlendedWrapped($font, string $text, Color $color, int $wrap_length) {
+        $c_color = $this->convertColor($color);
+        return $this->ttflib->TTF_RenderUTF8_Blended_Wrapped($font, $text, $c_color, $wrap_length);
+    }
+
+    /**
+     * @param ffi_cdata<sdl_ttf, struct TTF_Font*> $font
+     * @return ffi_cdata<sdl_ttf, void*>
+     */
     public function renderTextShaded($font, string $text, Color $fg, Color $bg) {
         $c_fg = $this->convertColor($fg);
         $c_bg = $this->convertColor($bg);
