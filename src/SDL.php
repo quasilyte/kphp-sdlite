@@ -16,27 +16,27 @@ namespace Quasilyte\SDLite;
 //    when needed.
 
 class SDL {
-    const AUDIO_U8     = 0x0008;
-    const AUDIO_S8     = 0x8008;
-    const AUDIO_U16LSB = 0x0010;
-    const AUDIO_S16LSB = 0x8010;
-    const AUDIO_U16MSB = 0x1010;
-    const AUDIO_S16MSB = 0x9010;
+    public const AUDIO_U8     = 0x0008;
+    public const AUDIO_S8     = 0x8008;
+    public const AUDIO_U16LSB = 0x0010;
+    public const AUDIO_S16LSB = 0x8010;
+    public const AUDIO_U16MSB = 0x1010;
+    public const AUDIO_S16MSB = 0x9010;
 
-    const RENDERER_SOFTWARE = 1;
-    const RENDERER_ACCELERATED = 2;
+    public const RENDERER_SOFTWARE = 1;
+    public const RENDERER_ACCELERATED = 2;
 
-    const WINDOWPOS_CENTERED = 805240832;
+    public const WINDOWPOS_CENTERED = 805240832;
 
-    const INIT_TIMER          = 1;
-    const INIT_AUDIO          = 16;
-    const INIT_VIDEO          = 32;
-    const INIT_JOYSTICK       = 512;
-    const INIT_HAPTIC         = 4096;
-    const INIT_GAMECONTROLLER = 8192;
-    const INIT_EVENTS         = 16384;
-    const INIT_SENSOR         = 32768;
-    const INIT_EVERYTHING     = (
+    public const INIT_TIMER          = 1;
+    public const INIT_AUDIO          = 16;
+    public const INIT_VIDEO          = 32;
+    public const INIT_JOYSTICK       = 512;
+    public const INIT_HAPTIC         = 4096;
+    public const INIT_GAMECONTROLLER = 8192;
+    public const INIT_EVENTS         = 16384;
+    public const INIT_SENSOR         = 32768;
+    public const INIT_EVERYTHING     = (
         self::INIT_TIMER |
         self::INIT_AUDIO |
         self::INIT_VIDEO |
