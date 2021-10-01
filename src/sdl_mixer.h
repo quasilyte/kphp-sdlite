@@ -9,11 +9,15 @@ typedef int16_t Sint16;
 typedef int32_t Sint32;
 
 typedef struct { void *_opaque; } Mix_Chunk;
+typedef struct { void *_opaque; } Mix_Music;
 typedef struct { void *_opaque; } SDL_RWops;
 
 int Mix_OpenAudio(int frequency, Uint16 format, int channels, int chunksize);
 
 SDL_RWops *SDL_RWFromFile(const char *file, const char *mode);
 Mix_Chunk *Mix_LoadWAV_RW(SDL_RWops *src, int freesrc);
+
+Mix_Music *Mix_LoadMUS(const char *file);
+int Mix_PlayMusic(Mix_Music *music, int loops);
 
 int Mix_PlayChannelTimed(int channel, Mix_Chunk *chunk, int loops, int ticks);

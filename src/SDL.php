@@ -156,6 +156,16 @@ class SDL {
         return $this->mixerlib->Mix_OpenAudio($frequency, $format, $channels, $chunksize) === 0;
     }
 
+    /** @return ffi_cdata<sdl_mixer, struct Mix_Music*> */
+    public function loadMusic(string $filename) {
+        return $this->mixerlib->Mix_LoadMUS($filename);
+    }
+
+    /** @param ffi_cdata<sdl_mixer, struct Mix_Music*> $music */
+    public function playMusic($music, int $loops = -1): bool {
+        return $this->mixerlib->Mix_PlayMusic($music, $loops) === 0;
+    }
+
     /** @return ffi_cdata<sdl_mixer, struct Mix_Chunk*> */
     public function LoadWAV(string $filename) {
         return $this->mixerlib->Mix_LoadWAV_RW($this->mixerlib->SDL_RWFromFile($filename, "rb"), 1);
