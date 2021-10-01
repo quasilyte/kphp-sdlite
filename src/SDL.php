@@ -167,12 +167,12 @@ class SDL {
     }
 
     /** @return ffi_cdata<sdl_mixer, struct Mix_Chunk*> */
-    public function LoadWAV(string $filename) {
+    public function loadWAV(string $filename) {
         return $this->mixerlib->Mix_LoadWAV_RW($this->mixerlib->SDL_RWFromFile($filename, "rb"), 1);
     }
 
     /** @param ffi_cdata<sdl_mixer, struct Mix_Chunk*> $chunk */
-    public function PlayChannel(int $channel, $chunk, int $loops): bool {
+    public function playChannel(int $channel, $chunk, int $loops): bool {
         return $this->mixerlib->Mix_PlayChannelTimed($channel, $chunk, $loops, -1) !== -1;
     }
 
