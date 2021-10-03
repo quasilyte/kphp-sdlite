@@ -10,9 +10,9 @@ typedef int32_t Sint32;
 
 typedef Sint32 SDL_Keycode;
 
-typedef struct { void *_opaque; } SDL_Window;
-typedef struct { void *_opaque; } SDL_Renderer;
-typedef struct { void *_opaque; } SDL_Texture;
+typedef struct SDL_Window SDL_Window;
+typedef struct SDL_Renderer SDL_Renderer;
+typedef struct SDL_Texture SDL_Texture;
 
 typedef struct SDL_Rect {
   int x, y;

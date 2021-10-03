@@ -8,9 +8,9 @@ typedef int8_t Sint8;
 typedef int16_t Sint16;
 typedef int32_t Sint32;
 
-typedef struct { void *_opaque; } Mix_Chunk;
-typedef struct { void *_opaque; } Mix_Music;
-typedef struct { void *_opaque; } SDL_RWops;
+typedef struct Mix_Chunk Mix_Chunk;
+typedef struct Mix_Music Mix_Music;
+typedef struct SDL_RWops SDL_RWops;
 
 int Mix_OpenAudio(int frequency, Uint16 format, int channels, int chunksize);
 
