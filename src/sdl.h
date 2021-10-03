@@ -14,19 +14,19 @@ typedef struct { void *_opaque; } SDL_Window;
 typedef struct { void *_opaque; } SDL_Renderer;
 typedef struct { void *_opaque; } SDL_Texture;
 
-typedef struct {
+typedef struct SDL_Rect {
   int x, y;
   int w, h;
 } SDL_Rect;
 
-typedef struct {
+typedef struct SDL_Keysym {
   int scancode;
   SDL_Keycode sym;
   Uint16 mod;
   Uint32 unused;
 } SDL_Keysym;
 
-typedef struct {
+typedef struct SDL_KeyboardEvent {
   Uint32 type;
   Uint32 timestamp;
   Uint32 windowID;
@@ -42,7 +42,7 @@ typedef struct SDL_QuitEvent {
   Uint32 timestamp;
 } SDL_QuitEvent;
 
-typedef struct {
+typedef struct SDL_WindowEvent {
   Uint32 type;
   Uint32 timestamp;
   Uint32 windowID;
@@ -54,7 +54,7 @@ typedef struct {
   Sint32 data2;
 } SDL_WindowEvent;
 
-typedef struct {
+typedef struct SDL_TextEditingEvent {
   Uint32 type;
   Uint32 timestamp;
   Uint32 windowID;
@@ -63,7 +63,7 @@ typedef struct {
   Sint32 length;
 } SDL_TextEditingEvent;
 
-typedef struct {
+typedef struct SDL_MouseMotionEvent {
   Uint32 type;
   Uint32 timestamp;
   Uint32 windowID;
