@@ -79,7 +79,7 @@ class SDL {
     }
 
     public function getError(): string {
-        return $this->corelib->SDL_GetError();
+        return (string)$this->corelib->SDL_GetError();
     }
 
     /** @return ffi_cdata<sdl, struct SDL_Window*> */
